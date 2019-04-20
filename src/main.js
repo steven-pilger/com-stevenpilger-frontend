@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 
 Vue.config.productionTip = false;
+document.title = "Hi there! 👋";
 
 new Vue({
   router,
