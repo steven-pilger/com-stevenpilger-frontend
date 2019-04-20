@@ -1,39 +1,6 @@
-# frontend
+# [[Frontend (stevenpilger.com)](https://stevenpilger.com)]
 
-## Project setup
-```
-yarn install
-```
+## Repository for the frontend of my personal website
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your end-to-end tests
-```
-yarn run test:e2e
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)]
+[![Travis](https://travis-ci.org/steven-pilger/com-stevenpilger-frontend.svg?branch=master)]
