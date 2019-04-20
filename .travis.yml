@@ -1,15 +1,14 @@
 language: node_js
 node_js:
   - lts/*
-
 services:
   - docker
-
 before_install:
   - docker build -t stevenpilger/frontend-test -f test.Dockerfile .
   - docker run -it --rm stevenpilger/frontend-test
   - docker build -t stevenpilger/frontend -f production.Dockerfile .
-
+script:
+  - sleep 10
 env:
   global:
     DOCKER_EMAIL:
@@ -18,13 +17,16 @@ env:
       secure: dhk/GBLYmhwEvOJIOrQ32gBOyN7Z6WolVjcanQB7h33abo6JpcXXYt8vKEYGpGkQ9DLUHwi728Qd73Sk/Y1OYAyCvvMBa3KTKfwWCNI8sBLPwiXfrbrZoyvE9zYn/8Zaz2k1zl16Jxx94Okqbx6wRIVxxGygE3tverZQA4B8p1fanelvP194wtZQKwNYU178P73rdROaB+TID9mWg5VxiZu8x0REIjgwfRFBHWuSz4WCqLxYSrcWtyOVSNPLkiqxiympIGqjuQZpI4z9htsyOz/ED4iVRzD5rOiMm3ZuYGyMCrmg0TSdvOEHhpA20yf6fBZAuEoi9ggoUP0R0B7nES/ksqf0duJIi1TULeAQpIY3Vj1YeCAnyosyJHW7VFUOfOrCvsnBJdMZ0a4//01g91RlraTwXI8S+ZjbWM877JU0PssZrrf43kZ1dvhfmA169HvLjpWlXbOKHBCNLdeaRxptpS4eDGNfd3dtZLOTbUNZoVMcnK/LyPiwpwDOpnGgi/W/R2kp8piwC8AtNq00B6kyFuIwc7nsmM70a7hPjRIbTk8w90TfA0cCkmDitzdl/REeSeH3Lay+Ej7FZ7yVQQuj7xvOg31OHd/YPsJRooxBNkmaCKxubByiSBsN6o8JtozC+H/40fjX6oWFRNZtVCFH8a51vnxSr7uEWAVfVaM=
     DOCKER_PASS:
       secure: 1XiNG3w2uxmBdgt81VIzYQkHxh/roB3sHnf1kHtyjIgR4+lkLuZPF34ygJ0WR/Lol3xNmdEu8FnGv3qhtwO8NMnE7Xhm/TT+qWKUeN3ge8m4vZGPCeC6WxAwkKR34RRg1WiJQiZfsWcYdTWo3tlqI3j8Rq14Z/d375UkfL1kHyutHb1HZD7WguZszUIL/RRgT1rv2IAO8gn0S566fqyEz2enL9YJ6gcbTMj70mIkmyvdR9VujcEIz5uHXjXFTt+lkETHYGb2/2dCWOfiRtZDjEe3b6p8XRlxjhERAPwh0AEnLRqcAvKAnlJ+9TxYqS2FwVLjvGIZrKRWoXLpJBMX8ExiMaS7WlmwqwASK0s7e6THe2FBDar1Yqd4NG6SzvF1ei5W3XaaEPl4UTNyVXzZTw0ajD5cLrpJ6SXXcsv3Vg6ehb2u+aDSNyBvnIMWb0gtxNRZBy/xRd9C1BRlo6arJ2DPcc6YasN5ngiT5qJvYutMn9jNQ3dSq50pU4p3kaK+VbdMPBMfQaP5++rP4eNHKaSD4FWZ7Iab9crdJBDeIcMAWMMEsXjUBdQy8QPiHKWAQYvU2HzU3jMyXZ4gx/JBksYuw0hI1eJdaCSEE9bap5sRLBTLAZrObROx+jmzuqkKoN/zEjtlTdOelnMpAOU/uBkW+kUpG0AOtxxyVBaDK3Q=
-
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=$DOCKER_USER/frontend
-  - export TAG=`if [ “$TRAVIS_BRANCH” == “master” ]; then echo “latest”; else echo $TRAVIS_BRANCH ; fi`
+  - export TAG=`if [ “$TRAVIS_BRANCH” == “master” ]; then echo “latest”; else echo $TRAVIS_BRANCH
+    ; fi`
   - echo $REPO:$TAG:$COMMIT
   - docker build -f Dockerfile -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$TAG
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
+deploy:
+  api_key:
+    secure: M/rnatUx1vxDI06GGvbE0V/c61ietj4D/m0O5q87sBxkVXciUT6gz4FVz4WctOX878UvBqioCMz3ap+2tZqbxhQsercXjAyUbRLueHK1sN5SvpBYtYSlAHPYE13Hgmg26CwXPgRkx7A4XEtx00quWbiiRv+9bMSaOpmAiBh3XQvGHtAo44soCNbNx962ugf9/pPQQcXg4YysT1/OIrM4hwz8nInRtV5JMXturLlrXAOCvEiW8Gf4kG0ef1taQ8Tuix8nPqY4aDWbrbGEExszm96vrh2J5Inokn3FJWaHLwbpK1LBxKfzBIWOjRZ0DaUa+j7aD2hYaes/QjY7SCvVm8teTWYqki7ce0RXBdtzuSZMs59deSnrEtaFdT3OzQ5fXZsUK9hIrhph2s93WPDXILGM7QnsHRYdIiAzKROQjs6jJhVn2hsIcSdmXQItCOjHRtN3BoDn+PYsLzuxnV/JNstr9fQ6UNvQl9/wt9uHOCXXUDHfo0YYuG3+X6ixkvIOBs/CHECMbcwvm2et7eaYyDBMP5t1ZWg6o6pDHPNj/BGb2lfb+bT6TSySbJHCWLofclhUUeVakQxl614Mp7s8eyppKSzoORuUAWfQUei9fzeWlY3RJwkWLzJEcUM4+oelqDdkV7e9ppOBYo4qRM7PtoQ9vJegndn3X3UpO252KrU=
