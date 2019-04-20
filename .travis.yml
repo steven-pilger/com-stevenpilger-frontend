@@ -5,9 +5,8 @@ services:
   - docker
 before_install:
   - docker build -t stevenpilger/frontend-test -f Dockerfile --target build .
-  - docker run -it --rm stevenpilger/frontend-test /bin/sh -c "npm run test:unit"
 script:
-  - sleep 1
+  - docker run -it --rm stevenpilger/frontend-test /bin/sh -c "npm run test:unit"
 deploy:
   provider: heroku
   app: com-stevenpilger-frontend
