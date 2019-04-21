@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|PT+Serif:400,400i");
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+
+@import "~bulma/sass/utilities/_all";
+@import "@/styles/_variables.scss";
+
+$colors: (
+  "white": (
+    $white,
+    $black
+  ),
+  "black": (
+    $black,
+    $white
+  ),
+  "light": (
+    $light,
+    $light-invert
+  ),
+  "dark": (
+    $dark,
+    $dark-invert
+  ),
+  "primary": (
+    $primary,
+    $primary-invert
+  ),
+  "info": (
+    $info,
+    $info-invert
+  ),
+  "success": (
+    $success,
+    $success-invert
+  ),
+  "warning": (
+    $warning,
+    $warning-invert
+  ),
+  "danger": (
+    $danger,
+    $danger-invert
+  )
+);
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+@import "@/styles/_standards.scss";
