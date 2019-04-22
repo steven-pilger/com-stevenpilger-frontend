@@ -11,4 +11,5 @@
 <style lang="scss">
 @import "~normalize.css/normalize.css";
 @import "@/styles/base.scss";
+// @import url("https://use.fontawesome.com/releases/v5.2.0/css/all.css");
 </style>
