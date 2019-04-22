@@ -15,11 +15,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Open Sans", sans-serif;
+  font-family: $fss;
+  -webkit-font-smoothing: antialiased; /* Chrome, Safari */
+  -moz-osx-font-smoothing: grayscale; /* Firefox */
 }
 
 p {
-  font-family: "PT Serif", serif;
+  font-family: $fsf;
   -webkit-font-smoothing: antialiased; /* Chrome, Safari */
   -moz-osx-font-smoothing: grayscale; /* Firefox */
 }
