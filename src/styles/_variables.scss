@@ -1,0 +1,14 @@
+// SOURCE: https://culrs.com/?ref=producthunt#/lightquad?id=presence
+$clr-orange: #f9a255;
+$clr-blue: #85a6d8;
+$clr-cyan: #d5fffd;
+$clr-yellow: #fdf7bb;
+
+$primary: $clr-orange;
+$primary-invert: findColorInvert($primary);
+$secondary: $clr-blue;
+$secondary-invert: findColorInvert($secondary);
+$background: #f5f3ef;
+
+$fss: "Open Sans", sans-serif;
+$fsf: "PT Serif", serif;
